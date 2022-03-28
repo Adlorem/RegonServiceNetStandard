@@ -1,0 +1,125 @@
+﻿@page "/"
+@using BIRBlazorTest.Data
+@using BIRBlazorTest.Models
+@using BIRBlazorTest.Enums
+@inject RegonService RegonService
+
+<PageTitle>Index</PageTitle>
+
+    <div class="container">
+    @if (_errorList.Count > 0)
+    {
+        foreach (var error in _errorList)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @error
+            </div>
+        }
+
+    }
+    <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+                <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                    <div class="card-img-left d-none d-md-flex">
+                </div>
+                    <div class="card-body p-4 p-sm-5">
+                        <EditForm Context="child" model="@_model">
+                            <DataAnnotationsValidator />
+                            <div class="input-group mb-3">
+                                <div class="form-floating flex-grow-1">
+                                    <InputText @bind-Value="_model.Vat" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" />
+                                    <label for="floatingInputVat">Nr NIP</label>
+                                    <ValidationMessage For="@(() => _model.Vat)" />
+                                </div> 
+                                <button disabled="@_isLoading" class="btn btn-primary text-uppercase" type="button" @onclick="@(_ => OnSearchCompany(SearchParameter.Nip))"><i class="fas fa-search"></i> Szukaj</button>     
+                            </div>   
+                            <div class="input-group mb-3">
+                                <div class="form-floating flex-grow-1">
+                                    <InputText @bind-Value="_model.Regon" class="form-control" id="floatingInputVAT" placeholder="Nr Regon" />
+                                    <label for="floatingInputVat">Nr Regon</label>
+                                    <ValidationMessage For="@(() => _model.Regon)" />
+                                </div> 
+                                <button disabled="@_isLoading" class="btn btn-primary text-uppercase" type="button" @onclick="@(_ => OnSearchCompany(SearchParameter.Regon))"><i class="fas fa-search"></i> Szukaj</button>     
+                            </div>
+                            <div class="form-floating mb-3">
+                                <InputText @bind-Value="_model.Name" class="form-control text-capitalize" id="floatingName" placeholder="Nazwa firmy" />
+                                <label for="floatingName">Nazwa firmy</label>
+                                <ValidationMessage For="@(() => _model.Name)" />
+                            </div>
+                            <div class="form-floating mb-3">
+                                <InputText @bind-Value="_model.Address" class="form-control" id="floatingInputAddress" placeholder="Adres" />
+                                <label for="floatingInputAddress">Adres</label>
+                                <ValidationMessage For="@(() => _model.Address)" />
+                            </div>
+
+                            <hr>
+                        </EditForm>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@code {
+    private CompanyModel  _model = new CompanyModel();
+    private bool _isLoading = false;
+    private List<string> _errorList = new List<string>();
+
+
+    private async void OnSearchCompany(SearchParameter parameter)
+    {
+        if (!IsSearchValid(parameter)) return;
+
+        _errorList.Clear();
+
+        _isLoading = true;
+
+        switch(parameter)
+        {
+            case SearchParameter.Nip :
+                _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+                break;
+            case SearchParameter.Regon:
+                _model = await RegonService.GetCompanyDataByRegonAsync(_model.Regon);
+                break;
+        }
+
+        _isLoading = false;
+
+        if (_model.Errors.Count > 0)
+        {           
+            foreach (var error in _model.Errors)
+            {
+                _errorList.Add(error.ErrorMessagePl);
+            }
+        }
+
+        StateHasChanged();
+    }
+
+    private bool IsSearchValid (SearchParameter parameter)
+    {
+        switch (parameter)
+        {
+            case SearchParameter.Nip:
+                if (string.IsNullOrEmpty(_model.Vat))
+                {
+                    _errorList.Add("Brak numeru NIP");
+                    return false;
+                }
+                break;
+            case SearchParameter.Regon:
+                if (string.IsNullOrEmpty(_model.Regon))
+                {
+                    _errorList.Add("Brak numeru Regon");
+                    return false;
+                }
+                break;
+        }
+        return true;
+    }
+
+
+
+}

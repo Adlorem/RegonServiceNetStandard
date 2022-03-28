@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIRService", "BIRService\BIRService.csproj", "{6026D9C5-7FA3-4104-A9EE-E50F4B1BE2A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIRBlazorTest", "BIRBlazorTest\BIRBlazorTest.csproj", "{567EF265-4E2E-47DE-8637-7041B8A5D72C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6026D9C5-7FA3-4104-A9EE-E50F4B1BE2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6026D9C5-7FA3-4104-A9EE-E50F4B1BE2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6026D9C5-7FA3-4104-A9EE-E50F4B1BE2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6026D9C5-7FA3-4104-A9EE-E50F4B1BE2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{567EF265-4E2E-47DE-8637-7041B8A5D72C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{567EF265-4E2E-47DE-8637-7041B8A5D72C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{567EF265-4E2E-47DE-8637-7041B8A5D72C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{567EF265-4E2E-47DE-8637-7041B8A5D72C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2C4A8C6-E38F-4CC1-B55C-A4A45053DF1D}
+	EndGlobalSection
+EndGlobal
