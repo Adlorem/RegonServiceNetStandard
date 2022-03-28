@@ -13,7 +13,7 @@ namespace BIRService
         /// <summary>
         /// Zwraca dane podmiotu w postaci modelu na podstawie numeru Regon.
         /// </summary>
-        /// <param name="regonId"></param>
+        /// <param name="regonId">Nr identyfikacyjny Regon</param>
         /// <returns></returns>
         Task<DanePodmiotu> GetCompanyDataByRegonAsync(string regonId);
 

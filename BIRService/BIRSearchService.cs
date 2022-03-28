@@ -142,7 +142,7 @@ namespace BIRService
             if (element == null) return null;
 
             var serializer = new XmlSerializer(typeof(T));
-            return (T)serializer.Deserialize(element.CreateReader());
+            return serializer.Deserialize(element.CreateReader()) as T;
 
         }
     }
