@@ -12,6 +12,10 @@ namespace BIRService.Tests
     public class BirSearchServiceTests
     {
         private BIRSearchService _service;
+        /// <summary>
+        /// Własny klucz wymagany dla testów. Testy z użyciem serwisu nie mogą przekroczyć
+        /// ilości 3 zapytań na sekundę.
+        /// </summary>
         private string _bIRKey = "";
         public BirSearchServiceTests()
         {
